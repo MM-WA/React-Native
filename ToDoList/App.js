@@ -1,12 +1,12 @@
-import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
+import AddTask from './myComponents/AddTask'
+import { View } from 'react-native'
+
 
 export default function App() {
   return (
-    <View>
-      <Text>App</Text>
-    </View>
-  )
-}
+      <View style = {{flex: 1}}>
+        <AddTask />
+      </View>
+  )}
 
-const styles = StyleSheet.create({})
