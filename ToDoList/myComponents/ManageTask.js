@@ -10,25 +10,26 @@ import {
     ScrollView
 } from 'react-native'
 
-
+let taskIndex; //will use in save and cancle btn function in updating task.
 export default function AddTask() {
     const [addTaskModalVisible, setAddTaskModalVisible] = useState(false)
-    const [updateTaskModalVisible, setupdateTaskModalVisible] = useState(false)
-    const [task, setTask] = useState("")
+    const [updateTaskModalVisible, setUpdateTaskModalVisible] = useState(false)
+    const [taskTitle, setTaskTitle] = useState("")
     const [taskDetails, setTaskDetails] = useState("")
+    const [taskCheckBox, setTaskCheckBox] = useState(false)
     const [tasks, setTasks] = useState([])
     const [selectedTask, setSelectedTask] = useState(null)
 
     const addTask = function () {
-        if (task || taskDetails) {
+        if (taskTitle || taskDetails) {
             const newTask = {
-                task: task,
+                taskTitle: taskTitle,
                 taskDetails: taskDetails,
                 checkBoxChecked: false
             }
 
             setTasks([...tasks, newTask])
-            setTask("")
+            setTaskTitle("")
             setTaskDetails("")
 
             saveTasks([...tasks, newTask])
@@ -54,12 +55,46 @@ export default function AddTask() {
         setTasks(updatedTasks)
     }
 
-    const update_Task = (task) => {
-        if(task) {
-            setupdateTaskModalVisible(true)
-            setSelectedTask(task) 
-        }
+    const update_Task = (task, index) => {
+        taskIndex = index
+        setSelectedTask(task)
+        setUpdateTaskModalVisible(true)
     }
+
+    const saveUpdatedTask = () => {
+        const allTasks = tasks
+        let updatedTask = {
+            taskTitle: taskTitle,
+            taskDetails: taskDetails,
+            checkBoxChecked: taskCheckBox
+        }
+
+        allTasks[taskIndex] = updatedTask;
+        setTasks(allTasks)
+        // saveTasks(tasks) //componentDidUpdate will handle this
+        setTaskTitle("")
+        setTaskDetails("")
+
+        setUpdateTaskModalVisible(false)
+    }
+
+    const deleteTask = () => {
+        const allTasks = tasks
+        const updatedTasks = allTasks.filter((task, index) => index != taskIndex)
+
+        setTasks(updatedTasks)
+        // saveTasks(tasks) //componentDidUpdate will handle this
+
+        setUpdateTaskModalVisible(false)
+    }
+
+    useEffect(() => {
+        if (selectedTask) {
+            setTaskTitle(selectedTask.taskTitle)
+            setTaskDetails(selectedTask.taskDetails)
+            setTaskCheckBox(selectedTask.checkBoxChecked)
+        }
+    }, [selectedTask])
 
     useEffect(() => {//componentDidMount
         loadTasks()
@@ -74,23 +109,23 @@ export default function AddTask() {
             <ScrollView>
                 {
                     tasks.length ?
-                        tasks.map((task, index) => {
+                        tasks.map((element, index) => {
                             const taskStyle = {
-                                textDecorationLine: task.checkBoxChecked ? "line-through" : "none"
+                                textDecorationLine: (element.checkBoxChecked && element.taskTitle) ? "line-through" : "none"
                             }
 
                             return (
-                                <TouchableWithoutFeedback onPress={() => update_Task(task)} key={index}>
+                                <TouchableWithoutFeedback onPress={() => (update_Task(element, index))} key={index}>
                                     <View style={styles.taskDescription}>
                                         <View style={{ flexDirection: "row" }}>
                                             <CheckBox
-                                                value={task.checkBoxChecked}
+                                                value={element.checkBoxChecked}
                                                 onValueChange={() => toggleCheckBox(index)}
                                                 tintColors={{ true: "black", false: "black" }}
                                             />
-                                            <Text style={[styles.taskStyle, taskStyle]}> {task.task} </Text>
+                                            <Text style={[styles.taskStyle, taskStyle]}> {element.taskTitle} </Text>
                                         </View>
-                                        <Text style={styles.taskDetailsStyle}> {task.taskDetails} </Text>
+                                        <Text style={styles.taskDetailsStyle}> {element.taskDetails} </Text>
                                     </View>
                                 </TouchableWithoutFeedback>
                             )
@@ -116,7 +151,7 @@ export default function AddTask() {
                     <View style={styles.modal}>
                         <TextInput
                             placeholder='New Task'
-                            onChangeText={(text) => setTask(text)}
+                            onChangeText={(text) => setTaskTitle(text)}
                             multiline={true}
                             style={styles.modalInputField_1}
                         />
@@ -146,28 +181,34 @@ export default function AddTask() {
                     <View style={styles.modal}>
                         <TextInput
                             placeholder='New Task'
-                            value = {selectedTask.task}
-                            onChangeText={(text) => setTask(text)}
+                            value={taskTitle}
+                            onChangeText={(text) => setTaskTitle(text)}
                             multiline={true}
                             style={styles.modalInputField_1}
                         />
 
                         <TextInput
                             placeholder='Add Details'
-                            value = {selectedTask.taskDetails}
+                            value={taskDetails}
                             onChangeText={(text) => setTaskDetails(text)}
                             multiline={true}
                             style={styles.modalInputField_2}
                         />
 
-                        <View style = {styles.updateModalButtons}>
-                            <TouchableWithoutFeedback onPress = {() => setupdateTaskModalVisible(false)}>
+                        <View style={styles.updateModalButtons}>
+                            <TouchableWithoutFeedback onPress={() => deleteTask()}>
+                                <View style={styles.modalButton}>
+                                    <Text style={styles.modalButtonText}> Delete </Text>
+                                </View>
+                            </TouchableWithoutFeedback>
+
+                            <TouchableWithoutFeedback onPress={() => setUpdateTaskModalVisible(false)}>
                                 <View style={styles.modalButton}>
                                     <Text style={styles.modalButtonText}> Cancel </Text>
                                 </View>
                             </TouchableWithoutFeedback>
 
-                            <TouchableWithoutFeedback onPress = {() => console.warn("Saved")}>
+                            <TouchableWithoutFeedback onPress={() => saveUpdatedTask()}>
                                 <View style={styles.modalButton}>
                                     <Text style={styles.modalButtonText}> Save </Text>
                                 </View>
