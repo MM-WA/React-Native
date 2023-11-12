@@ -3,7 +3,8 @@ import {
     View, Text, 
     TextInput, 
     TouchableWithoutFeedback, 
-    Modal 
+    Modal, 
+    ImageBackground
 } from "react-native"
 
 export const AddTaskModal = ({visible, onClose, setTaskTitle, setTaskDetails, addTask }) => {

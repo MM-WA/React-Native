@@ -151,7 +151,6 @@ export default function ManageTasks() {
                     </View>
                 </TouchableWithoutFeedback>
             </View>
-
             <AddTaskModal
                 visible = {addTaskModalVisible}
                 onClose = {closeAddTaskModal}
