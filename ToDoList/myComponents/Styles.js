@@ -25,7 +25,7 @@ export default Styles = StyleSheet.create({
     },
     modalContainer: {
         flex: 1,
-        alignItems: "center",
+        // alignItems: "center",
         justifyContent: "flex-end"
     },
     modal: {
@@ -100,5 +100,27 @@ export default Styles = StyleSheet.create({
         justifyContent: "space-evenly",
         paddingHorizontal: 20,
         marginTop: 10,
+    },
+    defaultMessageContainer: {
+        alignItems: "center",
+        // justifyContent: "center", // not working
+        marginTop: 330
+    },
+    defaultMessageText: {
+        fontFamily: "times new roman",
+        fontSize: 30
+    },
+    addTimeBtn: {
+        height: 25,
+        width: 90,
+        borderWidth: 1,
+        borderRadius: 5
+    },
+    addTimebtnText: {
+        color: "black"
+    },
+
+    DatetimePickerContainer: {
+        alignItems: "flex-start"
     }
 })

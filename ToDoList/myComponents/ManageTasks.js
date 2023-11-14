@@ -3,7 +3,7 @@ import { useState } from 'react'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import CheckBox from '@react-native-community/checkbox'
 import Styles from './Styles'
-import { AddTaskModal, UpdateTaskModal } from './Modals'
+import { AddTaskModal, DateTimeModal, UpdateTaskModal } from './Modals'
 import {
     Text,
     TouchableWithoutFeedback,
@@ -139,7 +139,11 @@ export default function ManageTasks() {
                                     </View>
                                 </TouchableWithoutFeedback>
                             )
-                        }) : null
+                        }) : 
+                        
+                        <View style = {Styles.defaultMessageContainer}>
+                            <Text style = {Styles.defaultMessageText}> Nothing To Do! </Text>
+                        </View>
                 }
 
             </ScrollView>
@@ -151,6 +155,8 @@ export default function ManageTasks() {
                     </View>
                 </TouchableWithoutFeedback>
             </View>
+
+            
             <AddTaskModal
                 visible = {addTaskModalVisible}
                 onClose = {closeAddTaskModal}
@@ -170,6 +176,8 @@ export default function ManageTasks() {
                 setUpdateTaskModalVisible = {setUpdateTaskModalVisible}
                 saveUpdatedTask = {saveUpdatedTask}
             />
+
+            <DateTimeModal/>
         </View>
     )
 }

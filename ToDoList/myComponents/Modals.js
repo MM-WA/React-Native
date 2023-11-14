@@ -1,13 +1,13 @@
 import Styles from "./Styles"
-import { 
-    View, Text, 
-    TextInput, 
-    TouchableWithoutFeedback, 
-    Modal, 
-    ImageBackground
+import DateTimePicker from "react-native-modal-datetime-picker"
+import {
+    View, Text,
+    TextInput,
+    TouchableWithoutFeedback,
+    Modal
 } from "react-native"
 
-export const AddTaskModal = ({visible, onClose, setTaskTitle, setTaskDetails, addTask }) => {
+export const AddTaskModal = ({ visible, onClose, setTaskTitle, setTaskDetails, addTask }) => {
     return (
         <Modal
             visible={visible}
@@ -37,14 +37,28 @@ export const AddTaskModal = ({visible, onClose, setTaskTitle, setTaskDetails, ad
                         </View>
                     </TouchableWithoutFeedback>
                 </View>
+
+                <View style={Styles.DatetimePickerContainer}>
+                    <TouchableWithoutFeedback onPress={() => addTask()}>
+                        <View style={Styles.addTimeBtn}>
+                            <Text style={Styles.addTimebtnText}> Date </Text>
+                        </View>
+                    </TouchableWithoutFeedback>
+
+                    <TouchableWithoutFeedback onPress={() => addTask()}>
+                        <View style={Styles.addTimeBtn}>
+                            <Text style={Styles.addTimebtnText}> Time </Text>
+                        </View>
+                    </TouchableWithoutFeedback>
+                </View>
             </View>
         </Modal>
 
     )
 }
 
-export const UpdateTaskModal = ({visible, onClose, taskTitle, taskDetails, setTaskTitle, setTaskDetails, 
-                                 deleteTask, setUpdateTaskModalVisible, saveUpdatedTask}) => {
+export const UpdateTaskModal = ({ visible, onClose, taskTitle, taskDetails, setTaskTitle, setTaskDetails,
+    deleteTask, setUpdateTaskModalVisible, saveUpdatedTask }) => {
     return (
         <Modal
             visible={visible}
@@ -56,7 +70,7 @@ export const UpdateTaskModal = ({visible, onClose, taskTitle, taskDetails, setTa
                 <View style={Styles.modal}>
                     <TextInput
                         placeholder='New Task'
-                        value = {taskTitle}
+                        value={taskTitle}
                         onChangeText={(text) => setTaskTitle(text)}
                         multiline={true}
                         style={Styles.modalInputField_1}
@@ -92,5 +106,13 @@ export const UpdateTaskModal = ({visible, onClose, taskTitle, taskDetails, setTa
                 </View>
             </View>
         </Modal>
+    )
+}
+
+export const DateTimeModal = () => {
+    return (
+        <DateTimePicker
+            isVisible={true}
+        />
     )
 }
