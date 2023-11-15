@@ -25,7 +25,6 @@ export default Styles = StyleSheet.create({
     },
     modalContainer: {
         flex: 1,
-        // alignItems: "center",
         justifyContent: "flex-end"
     },
     modal: {
@@ -34,8 +33,6 @@ export default Styles = StyleSheet.create({
         backgroundColor: "#D3D3D3",
         borderTopRightRadius: 25,
         borderTopLeftRadius: 25,
-        alignItems: "center",
-        justifyContent: "center",
         elevation: 3
     },
     modalInputField_1: {
@@ -58,12 +55,17 @@ export default Styles = StyleSheet.create({
         marginBottom: 10,
         textAlignVertical: "top"
     },
+    modalInner_1: {
+        flex: 1,
+        justifyContent: "center",
+        marginHorizontal: 15
+    },
     modalButton: {
-        height: 60,
-        width: 60,
+        height: 45,
+        width: 45,
         backgroundColor: "#D3D3D3", //light gray
         borderWidth: 1,
-        borderRadius: 30,
+        borderRadius: 22,
         borderColor: "black",
         alignItems: "center",
         justifyContent: "center",
@@ -119,8 +121,9 @@ export default Styles = StyleSheet.create({
     addTimebtnText: {
         color: "black"
     },
-
-    DatetimePickerContainer: {
-        alignItems: "flex-start"
+    modalAddButtonContainer: {
+        flex: 0.3,
+        alignItems: "center",
+        justifyContent: "center"
     }
 })

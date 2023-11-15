@@ -17,39 +17,43 @@ export const AddTaskModal = ({ visible, onClose, setTaskTitle, setTaskDetails, a
         >
             <View style={Styles.modalContainer}>
                 <View style={Styles.modal}>
-                    <TextInput
-                        placeholder='New Task'
-                        onChangeText={(text) => setTaskTitle(text)}
-                        multiline={true}
-                        style={Styles.modalInputField_1}
-                    />
+                    <View style={Styles.modalInner_1}>
+                        <TextInput
+                            placeholder='New Task'
+                            onChangeText={(text) => setTaskTitle(text)}
+                            multiline={true}
+                            style={Styles.modalInputField_1}
+                        />
 
-                    <TextInput
-                        placeholder='Add Details'
-                        onChangeText={(text) => setTaskDetails(text)}
-                        multiline={true}
-                        style={Styles.modalInputField_2}
-                    />
+                        <TextInput
+                            placeholder='Add Details'
+                            onChangeText={(text) => setTaskDetails(text)}
+                            multiline={true}
+                            style={Styles.modalInputField_2}
+                        />
 
-                    <TouchableWithoutFeedback onPress={() => addTask()}>
-                        <View style={Styles.modalButton}>
-                            <Text style={Styles.modalButtonText}> Add </Text>
+                        <TouchableWithoutFeedback onPress={() => addTask()}>
+                            <View style={Styles.addTimeBtn}>
+                                <Text style={Styles.addTimebtnText}> Date </Text>
+                            </View>
+                        </TouchableWithoutFeedback>
+
+                        <TouchableWithoutFeedback onPress={() => addTask()}>
+                            <View style={Styles.addTimeBtn}>
+                                <Text style={Styles.addTimebtnText}> Time </Text>
+                            </View>
+                        </TouchableWithoutFeedback>
+                    </View>
+
+                    <View style={Styles.modalAddButtonContainer}>
+                        <View>
+                            <TouchableWithoutFeedback onPress={() => addTask()}>
+                                <View style={Styles.modalButton}>
+                                    <Text style={Styles.modalButtonText}> Add </Text>
+                                </View>
+                            </TouchableWithoutFeedback>
                         </View>
-                    </TouchableWithoutFeedback>
-                </View>
-
-                <View style={Styles.DatetimePickerContainer}>
-                    <TouchableWithoutFeedback onPress={() => addTask()}>
-                        <View style={Styles.addTimeBtn}>
-                            <Text style={Styles.addTimebtnText}> Date </Text>
-                        </View>
-                    </TouchableWithoutFeedback>
-
-                    <TouchableWithoutFeedback onPress={() => addTask()}>
-                        <View style={Styles.addTimeBtn}>
-                            <Text style={Styles.addTimebtnText}> Time </Text>
-                        </View>
-                    </TouchableWithoutFeedback>
+                    </View>
                 </View>
             </View>
         </Modal>
