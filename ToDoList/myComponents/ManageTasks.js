@@ -21,6 +21,7 @@ export default function ManageTasks() {
     const [taskCheckBox, setTaskCheckBox] = useState(false)
     const [tasks, setTasks] = useState([])
     const [selectedTask, setSelectedTask] = useState(null)
+    const [dateTimePickerVisibility, setDateTimePickerVisibility] = useState(false)
 
     const closeAddTaskModal = () => {
         setAddTaskModalVisible(false)
@@ -86,6 +87,10 @@ export default function ManageTasks() {
         setTaskDetails("")
 
         setUpdateTaskModalVisible(false)
+    }
+
+    const scheduleTask = () => {
+        // setDateTimePickerVisibility(true)
     }
 
     const deleteTask = () => {
@@ -156,6 +161,10 @@ export default function ManageTasks() {
                 </TouchableWithoutFeedback>
             </View>
 
+            <DateTimeModal
+                dateTimePickerVisibility = {dateTimePickerVisibility}
+                // scheduleTask = {scheduleTask}
+            />
             
             <AddTaskModal
                 visible = {addTaskModalVisible}
@@ -163,6 +172,7 @@ export default function ManageTasks() {
                 setTaskTitle = {setTaskTitle}
                 setTaskDetails = {setTaskDetails}
                 addTask = {addTask}
+                setDateTimePickerVisibility = {setDateTimePickerVisibility}
             />
 
             <UpdateTaskModal 
@@ -176,8 +186,6 @@ export default function ManageTasks() {
                 setUpdateTaskModalVisible = {setUpdateTaskModalVisible}
                 saveUpdatedTask = {saveUpdatedTask}
             />
-
-            <DateTimeModal/>
         </View>
     )
 }

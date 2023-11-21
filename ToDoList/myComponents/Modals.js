@@ -1,5 +1,5 @@
 import Styles from "./Styles"
-import DateTimePicker from "react-native-modal-datetime-picker"
+import DateTimePickerModal from "react-native-modal-datetime-picker";
 import {
     View, Text,
     TextInput,
@@ -7,7 +7,7 @@ import {
     Modal
 } from "react-native"
 
-export const AddTaskModal = ({ visible, onClose, setTaskTitle, setTaskDetails, addTask }) => {
+export const AddTaskModal = ({ visible, onClose, setTaskTitle, setTaskDetails, addTask, setDateTimePickerVisibility }) => {
     return (
         <Modal
             visible={visible}
@@ -32,15 +32,9 @@ export const AddTaskModal = ({ visible, onClose, setTaskTitle, setTaskDetails, a
                             style={Styles.modalInputField_2}
                         />
 
-                        <TouchableWithoutFeedback onPress={() => addTask()}>
+                        <TouchableWithoutFeedback onPress={() => setDateTimePickerVisibility(true)}>
                             <View style={Styles.addTimeBtn}>
-                                <Text style={Styles.addTimebtnText}> Date </Text>
-                            </View>
-                        </TouchableWithoutFeedback>
-
-                        <TouchableWithoutFeedback onPress={() => addTask()}>
-                            <View style={Styles.addTimeBtn}>
-                                <Text style={Styles.addTimebtnText}> Time </Text>
+                                <Text style={Styles.addTimebtnText}> Schedule </Text>
                             </View>
                         </TouchableWithoutFeedback>
                     </View>
@@ -57,7 +51,6 @@ export const AddTaskModal = ({ visible, onClose, setTaskTitle, setTaskDetails, a
                 </View>
             </View>
         </Modal>
-
     )
 }
 
@@ -113,10 +106,14 @@ export const UpdateTaskModal = ({ visible, onClose, taskTitle, taskDetails, setT
     )
 }
 
-export const DateTimeModal = () => {
+export const DateTimeModal = ({ dateTimePickerVisibility }) => {
+    console.warn(dateTimePickerVisibility)
     return (
-        <DateTimePicker
-            isVisible={true}
+        <DateTimePickerModal
+            isVisible={dateTimePickerVisibility}
+            mode="Date"
+            onConfirm={(date) => console.warn(date)}
+            // onCancel={}
         />
     )
 }

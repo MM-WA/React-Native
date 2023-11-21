@@ -33,7 +33,9 @@ export default Styles = StyleSheet.create({
         backgroundColor: "#D3D3D3",
         borderTopRightRadius: 25,
         borderTopLeftRadius: 25,
-        elevation: 3
+        elevation: 3,
+        alignItems: "center",
+        justifyContent: "center"
     },
     modalInputField_1: {
         width: 320,
@@ -61,11 +63,11 @@ export default Styles = StyleSheet.create({
         marginHorizontal: 15
     },
     modalButton: {
-        height: 45,
-        width: 45,
+        height: 60,
+        width: 60,
         backgroundColor: "#D3D3D3", //light gray
         borderWidth: 1,
-        borderRadius: 22,
+        borderRadius: 30,
         borderColor: "black",
         alignItems: "center",
         justifyContent: "center",
@@ -113,10 +115,8 @@ export default Styles = StyleSheet.create({
         fontSize: 30
     },
     addTimeBtn: {
-        height: 25,
-        width: 90,
-        borderWidth: 1,
-        borderRadius: 5
+        height: 30,
+        width: 90
     },
     addTimebtnText: {
         color: "black"
@@ -124,6 +124,7 @@ export default Styles = StyleSheet.create({
     modalAddButtonContainer: {
         flex: 0.3,
         alignItems: "center",
-        justifyContent: "center"
+        justifyContent: "center",
+        marginBottom: 20
     }
 })
